@@ -2,28 +2,32 @@ import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 interface Params {
-    context : {
-        id: string
-    }
+    params: {
+        id: string;
+    };
 }
 
-export async function PATCH(req: NextRequest, params: Params) {
+export async function POST(req: NextRequest, params: Params) {
     try {
-        const id  = params.context.id
+        const { params: { id } } = params;
 
-        const { status } = await req.json()
+        if (!id) {
+            return NextResponse.json({ success: false, message: "ID is missing in the request params" }, { status: 400 });
+        }
+
+        const { status } = await req.json();
 
         const task = await prisma.todo.findUnique({
             where: {
                 id
             }
-        })
+        });
 
         if (!task) {
-            return NextResponse.json({ success:false, message: "Task not found" }, { status: 404 });
+            return NextResponse.json({ success: false, message: "Task not found" }, { status: 404 });
         }
 
         await prisma.todo.update({
@@ -33,14 +37,17 @@ export async function PATCH(req: NextRequest, params: Params) {
             data: {
                 status
             }
-        })
+        });
 
-        const path = req.nextUrl.searchParams.get('path') || "/"
-        revalidatePath(path)
+        const path = req.nextUrl.searchParams.get('path') || "/";
+        revalidatePath(path);
 
-        return NextResponse.json({ success:true, message: "Task updated successfully" }, { status: 200 });
-        
+        return NextResponse.json({ success: true, message: "Task updated successfully" }, { status: 200 });
+
     } catch (error) {
-        return NextResponse.json({ success:false, message: "Internal Server Error" }, { status: 500 });
+        console.error("Error updating task:", error);
+        return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
+    } finally {
+        await prisma.$disconnect();
     }
 }

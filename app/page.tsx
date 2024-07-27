@@ -26,7 +26,8 @@ const HomePage = () => {
   }, [fetchTodos]);
 
   const handleDrop = async (id: string, status: string) => {
-    const data = await axios.patch(`/api/tasks/patchTask/${id}`, {
+    console.log(id, status);
+    const data = await axios.post(`/api/tasks/patchTask/${id}`, {
       status: status.toUpperCase()
     })
 
@@ -38,6 +39,10 @@ const HomePage = () => {
       })
       return;
     }
+    toast({
+      title: 'Success',
+      description: data.data.message,
+    })
 
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
