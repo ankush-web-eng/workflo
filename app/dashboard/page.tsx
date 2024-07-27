@@ -1,8 +1,9 @@
 'use client'
 
 import AddTaskTrigger from "@/components/extentions/AddTaskTrigger"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import Tasks from "./tasks"
+import { Button } from "@/components/ui/button"
 
 export default function Page() {
 
@@ -26,7 +27,10 @@ export default function Page() {
 
     return (
         <div className="m-3">
-            <h1 className="italic font-semibold text-3xl font-serif">{greeting} {session?.user?.name}</h1>
+            <div className="flex space-x-6 items-center">
+                <h1 className="italic font-semibold text-3xl font-serif">{greeting} {session?.user?.name}</h1>
+                <Button onClick={() => signOut()}>Logout</Button>
+            </div>
             <Tasks />
         </div>
     )
