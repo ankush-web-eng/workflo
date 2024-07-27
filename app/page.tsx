@@ -1,4 +1,5 @@
 'use client'
+import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import DragDropContext from '../context/DragDropContext';
 import DraggableCard from '../components/DraggableCard';
@@ -6,7 +7,6 @@ import DropArea from '../components/DropArea';
 import { Todo } from '@prisma/client';
 import { Status } from '@/types/StatusType';
 import { useSession } from 'next-auth/react';
-import axios from 'axios';
 import { useToast } from '@/components/ui/use-toast';
 
 const HomePage = () => {

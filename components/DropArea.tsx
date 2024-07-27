@@ -1,5 +1,6 @@
 import { FC, useRef } from 'react';
 import { useDrop } from 'react-dnd';
+import AddTaskTrigger from './extentions/AddTaskTrigger';
 
 interface DropAreaProps {
   status: string;
@@ -22,10 +23,11 @@ const DropArea: FC<DropAreaProps> = ({ status, children }) => {
   return (
     <div
       ref={ref}
-      className={`p-4 border-2 border-dashed ${isOver ? 'border-blue-500' : 'border-gray-400'} rounded`}
+      className={`p-4 border ${isOver ? 'border-blue-500' : 'border-gray-400'} rounded`}
     >
       <p>{status}</p>
       {children}
+      <AddTaskTrigger status={status} />
     </div>
   );
 };
