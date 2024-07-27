@@ -22,7 +22,7 @@ export async function sendVerificationEmail(email: string,
   const mailOptions = {
     from: `"Ankush" <${process.env.EMAIL}>`,
     to: email,
-    subject: "Expense Tracker - Verify your email",
+    subject: "Workflo - Verify your email",
     text: `Hello ${name}, Your verification code is ${verifyCode}`,
     html: `<b>Hello ${name}, Your verification code is ${verifyCode}</b>`,
   }
