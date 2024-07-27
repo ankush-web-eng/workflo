@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +6,8 @@ const prisma = new PrismaClient()
 
 export async function POST(req : NextRequest) {
     try {
-        const { email, code } = await req.json();
+        const { email, otp } = await req.json();
+        const code : string = otp;
         const decodedEmail = decodeURIComponent(email);
 
         const user = await prisma.user.findUnique({
@@ -22,7 +23,7 @@ export async function POST(req : NextRequest) {
             );
         }
 
-        if (user.verificationCode !== code) {
+        if (user.verifyCode !== code) {
             return NextResponse.json(
                 { success: false, message: 'Invalid verification code' },
                 { status: 400 }

@@ -60,10 +60,10 @@ export default function VerifyForm({ email }: { email: string }) {
                     className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition-colors"
                 >
                     {loading ? (
-                        <>
+                        <span className='flex items-center space-x-2'>
                             <LuLoader className="mr-2 h-4 w-4 animate-spin" />
                             Verifying
-                        </>
+                        </span>
                     ) : (
                         'Verify'
                     )}

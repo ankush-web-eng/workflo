@@ -3,24 +3,54 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { LuLoader } from 'react-icons/lu';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useToast } from '../ui/use-toast';
 
-export default function LoginForm() {
+export default function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter()
+  const { toast } = useToast()
 
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-        
-    } catch (error) {
-        
+      const result = await signIn('credentials', {
+        redirect: false,
+        identifier: email,
+        password: password,
+      });
+      if (result?.error) {
+        if (result.error === 'CredentialsSignin') {
+          toast({
+            title: 'Login Failed',
+            description: 'Incorrect username or password',
+            variant: 'destructive',
+          });
+        } else {
+          toast({
+            title: 'Error',
+            description: result.error,
+            variant: 'destructive',
+          });
+        }
+      }
+      if (result?.url) {
+        router.replace('/dashboard');
+      }
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Server Error occurred. Please try again after some time.',
+        variant: 'destructive',
+      });
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   return (
     <div className="bg-white p-8 rounded-3xl shadow-md w-96">
@@ -55,7 +85,7 @@ export default function LoginForm() {
           type="submit"
           className="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition-colors"
         >
-         {loading ? <LuLoader className='animate-spin' size={16} color='black' /> : 'SignIn'}
+          {loading ? <span className='flex space-x-2 justify-around'>Signing in<LuLoader className='animate-spin' size={20} color='gray' /></span> : 'SignIn'}
         </button>
       </form>
       <p className="mt-4 text-center text-sm text-gray-600">

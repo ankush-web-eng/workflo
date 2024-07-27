@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcryptjs';
 import { revalidatePath } from "next/cache";
@@ -29,7 +29,8 @@ export async function POST(req: NextRequest) {
                     },
                     data: {
                         password: hashedPassword,
-                        verifyCode
+                        verifyCode,
+                        name
                     }
                 })
             }
@@ -38,7 +39,8 @@ export async function POST(req: NextRequest) {
                 data: {
                     email,
                     password: hashedPassword,
-                    name
+                    name,
+                    verifyCode
                 }
             })
             if (!user) {

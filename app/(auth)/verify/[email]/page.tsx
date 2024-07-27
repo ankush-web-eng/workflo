@@ -1,3 +1,4 @@
+'use client'
 import VerifyForm from '@/components/auth/VerifyForm';
 import { useParams } from 'next/navigation';
 
