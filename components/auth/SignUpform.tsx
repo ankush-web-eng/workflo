@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { LuLoader } from 'react-icons/lu';
-import { useToast } from '../ui/use-toast';
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { useToast } from '@/components/ui/use-toast';
+import { LuLoader } from 'react-icons/lu';
 
 export default function SignUpForm() {
     const [name, setName] = useState<string>('');

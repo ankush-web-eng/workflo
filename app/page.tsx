@@ -1,23 +1,47 @@
 'use client'
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DragDropContext from '../context/DragDropContext';
-import DraggableComponent from '../components/DraggableComponent';
+import DraggableCard from '../components/DraggableCard';
 import DropArea from '../components/DropArea';
-
-interface Component {
-  id: string;
-  label: string;
-}
+import { Todo } from '@prisma/client';
+import { Status } from '@/types/StatusType';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
+import { useToast } from '@/components/ui/use-toast';
 
 const HomePage = () => {
-  const [components, setComponents] = useState<Component[]>([
-    { id: '1', label: 'Component 1' },
-  ]);
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const { data: session } = useSession()
+  const {toast} = useToast()
 
-  const handleDrop = (id: string, label: string) => {
-    setComponents((prevComponents) =>
-      prevComponents.map((component) =>
-        component.id === id ? { ...component, label } : component
+  const fetchTodos = useCallback(async () => {
+    const response = await axios.get(`/api/tasks/getTasks/${session?.user?.email}`);
+    if (response.status === 200) {
+      setTodos(response.data.tasks);
+    }
+  }, [session])
+
+  useEffect(() => {
+    fetchTodos();
+  }, [fetchTodos]);
+
+  const handleDrop = async (id: string, status: string) => {
+    const data = await axios.patch(`/api/tasks/patchTask/${id}`, {
+      status: status.toUpperCase()
+    })
+
+    if (data.status !== 200) {
+      toast({
+        title: 'Error',
+        description: data.data.message,
+        variant: 'destructive'
+      })
+      return;
+    }
+
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, status: status as Status } : todo
       )
     );
   };
@@ -25,38 +49,46 @@ const HomePage = () => {
   return (
     <DragDropContext>
       <div className="flex space-x-4 p-4">
-        <DropArea label="Area 1">
-          {components
-            .filter((component) => component.label === 'Area 1')
-            .map((component) => (
-              <DraggableComponent
-                key={component.id}
-                id={component.id}
-                label={component.label}
+        <DropArea status="TODO">
+          {todos
+            .filter((todo) => todo.status === 'TODO')
+            .map((todo) => (
+              <DraggableCard
+                key={todo.id}
+                todo={todo}
                 onDrop={handleDrop}
               />
             ))}
         </DropArea>
-        <DropArea label="Area 2">
-          {components
-            .filter((component) => component.label === 'Area 2')
-            .map((component) => (
-              <DraggableComponent
-                key={component.id}
-                id={component.id}
-                label={component.label}
+        <DropArea status="PROGRESS">
+          {todos
+            .filter((todo) => todo.status === 'PROGRESS')
+            .map((todo) => (
+              <DraggableCard
+                key={todo.id}
+                todo={todo}
                 onDrop={handleDrop}
               />
             ))}
         </DropArea>
-        <DropArea label="Component Pool">
-          {components
-            .filter((component) => component.label !== 'Area 1' && component.label !== 'Area 2')
-            .map((component) => (
-              <DraggableComponent
-                key={component.id}
-                id={component.id}
-                label={component.label}
+        <DropArea status="REVIEW">
+          {todos
+            .filter((todo) => todo.status === 'REVIEW')
+            .map((todo) => (
+              <DraggableCard
+                key={todo.id}
+                todo={todo}
+                onDrop={handleDrop}
+              />
+            ))}
+        </DropArea>
+        <DropArea status="FINISHED">
+          {todos
+            .filter((todo) => todo.status === 'FINISHED')
+            .map((todo) => (
+              <DraggableCard
+                key={todo.id}
+                todo={todo}
                 onDrop={handleDrop}
               />
             ))}

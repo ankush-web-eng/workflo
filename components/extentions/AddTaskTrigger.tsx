@@ -10,13 +10,13 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
-import AddTask from "./AddTask"
+import AddTask from "@/components/extentions/AddTask"
 
 
 export default function AddTaskTrigger({ status }: { status: string }) {
 
     return (
-        <div className="w-screen">
+        <div className="w-fit">
             <Drawer>
                 <DrawerTrigger>
                     <Button className="flex justify-between px-3 w-full">

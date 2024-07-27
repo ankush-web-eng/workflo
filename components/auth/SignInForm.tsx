@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import { LuLoader } from 'react-icons/lu';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useToast } from '../ui/use-toast';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
+
+import { useToast } from '@/components/ui/use-toast';
+import { LuLoader } from 'react-icons/lu';
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');

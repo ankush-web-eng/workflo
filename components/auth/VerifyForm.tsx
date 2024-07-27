@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
 import axios from 'axios';
-import { ApiResponse } from '@/types/ApiResponse';
-import { useToast } from '../ui/use-toast';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { useToast } from '@/components/ui/use-toast';
 import { LuLoader } from 'react-icons/lu';
+
+import { ApiResponse } from '@/types/ApiResponse';
 
 export default function VerifyForm({ email }: { email: string }) {
     const [otp, setOtp] = useState('');
