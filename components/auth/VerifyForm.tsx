@@ -59,7 +59,7 @@ export default function VerifyForm({ email }: { email: string }) {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition-colors"
+                    className="w-full flex justify-center items-center bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition-colors"
                 >
                     {loading ? (
                         <>

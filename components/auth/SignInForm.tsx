@@ -12,6 +12,7 @@ export default function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState<boolean>(false)
+  const [visible, setVisible] = useState<boolean>(false)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -71,20 +72,20 @@ export default function SignInForm() {
         </div>
         <div className="mb-6 relative">
           <input
-            type="password"
+            type={visible ? 'text' : 'password'}
             placeholder="Password"
             className="w-full p-3 bg-gray-100 rounded-lg pr-10"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <span className="absolute right-3 top-3 text-gray-400">
+          <span onClick={() => setVisible(!visible)} className="cursor-pointer absolute right-3 top-3 text-gray-400">
             👁
           </span>
         </div>
         <button
           type="submit"
-          className="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition-colors"
+          className="w-full bg-purple-500 flex justify-center items-center text-white p-3 rounded-lg hover:bg-purple-600 transition-colors"
         >
           {loading ? (
             <>

@@ -13,6 +13,7 @@ export default function SignUpForm() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false)
+    const [visible, setVisible] = useState<boolean>(false)
     const { toast } = useToast()
     const router = useRouter()
 
@@ -63,19 +64,22 @@ export default function SignUpForm() {
                         required
                     />
                 </div>
-                <div className="mb-6">
+                <div className="mb-4 relative">
                     <input
-                        type="password"
+                        type={visible ? 'text' : 'password'}
                         placeholder="Password"
                         className="w-full p-2 border border-gray-300 rounded"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    <span onClick={() => setVisible(!visible)} className="cursor-pointer absolute right-3 top-3 text-gray-400">
+                        👁
+                    </span>
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-purple-600 text-white p-2 rounded hover:bg-purple-700 transition-colors"
+                    className="w-full flex justify-center items-center bg-purple-600 text-white p-2 rounded hover:bg-purple-700 transition-colors"
                 >
                     {loading ? (
                         <>
