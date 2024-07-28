@@ -1,6 +1,12 @@
-// app/page.tsx
 import ActionBar from '@/components/includes/ActionBar'
-import TaskBoard from './tasks'
+import TaskBoard from './TaskBoard'
+import { Metadata } from 'next'
+
+export const metadata : Metadata = {
+  title : 'Dashboard',
+  description : 'Dashboard page',
+  keywords : 'dashboard, tasks, todo, work'
+}
 
 export default function Home() {
   return (

@@ -25,9 +25,12 @@ const DropArea: FC<DropAreaProps> = ({ status, children }) => {
       ref={ref}
       className={`p-4 border ${isOver ? 'border-blue-500' : 'border-gray-400'} rounded`}
     >
-      <p>{status}</p>
-      {children}
-      <AddTaskTrigger status={status} />
+      <div className="space-y-4">
+        {children}
+        <div className='w-full'>
+          <AddTaskTrigger status={status} />
+        </div>
+      </div>
     </div>
   );
 };

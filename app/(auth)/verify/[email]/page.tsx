@@ -2,6 +2,14 @@
 import VerifyForm from '@/components/auth/VerifyForm';
 import { useParams } from 'next/navigation';
 
+import { Metadata } from 'next'
+
+export const metadata : Metadata = {
+  title : 'Verify Email',
+  description : 'Verify page',
+  keywords : 'Verify, Auth, Authentication, Verification, Authenicity'
+}
+
 export default function VerifyPage() {
   
   const params = useParams<{email : string}>();

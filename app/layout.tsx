@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import { Toaster } from "@/components/ui/toaster";
-import AuthProvider from "@/context/sessionProvider";
-import { TasksProvider } from "@/context/TasksContext";
 import Provider from "./provider";
-import Sidebar from "@/components/includes/Sidebar";
-import Header from "@/components/includes/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Workflo",
+  title: {
+    default : "Workflo",
+    template : "%s | Workflo"
+  },
   description: "Manage your tasks in an interactive way!",
 };
 

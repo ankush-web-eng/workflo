@@ -21,7 +21,6 @@ const TaskBoard = () => {
     }, [tasks]);
 
     const handleDrop = async (id: string, status: string) => {
-        console.log(id, status);
         const response = await axios.post(`/api/tasks/patchTask/${id}`, {
             status: status.toUpperCase()
         })

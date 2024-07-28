@@ -20,11 +20,13 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ onDateTimeChange }) => 
       selected={selectedDate}
       onChange={handleDateChange}
       showTimeSelect
+      minDate={new Date()}
       timeFormat="HH:mm"
       timeIntervals={15}
       dateFormat="MMMM d, yyyy h:mm aa"
       timeCaption="time"
-      className='p-2 rounded-3xl'
+      className='p-1 rounded-xl'
+      placeholderText='Pick date and time'
     />
   );
 };
