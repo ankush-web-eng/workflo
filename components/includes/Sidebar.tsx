@@ -18,7 +18,7 @@ const Sidebar = () => {
   }
 
   return (
-    <aside className="w-64 bg-white shadow-md hidden md:block">
+    <aside className="w-64 bg-white shadow-md hidden xl:block">
       <div className="p-4">
         <ProfileAvatar />
         <h2 className="text-xl font-bold">{session?.user?.name}</h2>
