@@ -6,7 +6,7 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
 import { useToast } from '@/components/ui/use-toast';
-import { LuLoader } from 'react-icons/lu';
+import { LuLoader2 } from 'react-icons/lu';
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');
@@ -86,7 +86,14 @@ export default function SignInForm() {
           type="submit"
           className="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition-colors"
         >
-          {loading ? <span className='flex space-x-2 justify-around'>Signing in<LuLoader className='animate-spin' size={20} color='gray' /></span> : 'SignIn'}
+          {loading ? (
+            <>
+              <LuLoader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </>
+          ) : (
+            'Sign In'
+          )}
         </button>
       </form>
       <p className="mt-4 text-center text-sm text-gray-600">

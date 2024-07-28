@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  mongodb:
+    image: "mongo"
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_volume:/data/db
+  workflo:
+    build : .
+    container_name: workflo
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+    environment:
+      - DATABASE_URL=mongodb://mongodb:27017/workflo
+    volumes:
+      - .:/app
+volumes:
+  mongo_volume:

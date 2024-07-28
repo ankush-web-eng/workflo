@@ -77,7 +77,14 @@ export default function SignUpForm() {
                     type="submit"
                     className="w-full bg-purple-600 text-white p-2 rounded hover:bg-purple-700 transition-colors"
                 >
-                    {loading ? <span className='flex space-x-2'>Please wait<LuLoader className='animate-spin' size={20} color='gray' /> </span> : 'Sign up'}
+                    {loading ? (
+                        <>
+                            <LuLoader className="mr-2 h-4 w-4 animate-spin" />
+                            Please wait
+                        </>
+                    ) : (
+                        'Sign Up'
+                    )}
                 </button>
             </form>
             <p className="mt-4 text-center text-sm">
