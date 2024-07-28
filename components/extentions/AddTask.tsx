@@ -7,6 +7,7 @@ import DateTimePicker from "@/components/extentions/DateTimePicker";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
+import { useTask } from "@/context/TasksContext";
 import { Status } from "@/types/StatusType";
 import { Priority } from "@/types/PriorityType";
 import { LuLoader2 } from "react-icons/lu";
@@ -23,6 +24,7 @@ export default function AddTask({ status }: { status: string }) {
     const { toast } = useToast();
     const router = useRouter()
     const {data:session} = useSession()
+    const {handlePatch} = useTask()
 
     const handleDateTimeChange = (date: Date | null) => {
         setDateTime(date);
@@ -49,7 +51,7 @@ export default function AddTask({ status }: { status: string }) {
                     description: "Task has been added successfully",
                     duration: 3000,
                 })
-                router.refresh()
+                handlePatch()
             } else {
                 toast({
                     title: "Failed to add task",

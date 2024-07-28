@@ -1,7 +1,6 @@
 'use client'
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { Todo } from '@prisma/client';
 
 import DragDropContext from '@/context/DragDropContext';
@@ -10,22 +9,16 @@ import { Status } from '@/types/StatusType';
 import DraggableCard from '@/components/DraggableCard';
 import DropArea from '@/components/DropArea';
 import { useToast } from "@/components/ui/use-toast";
+import { useTask } from '@/context/TasksContext';
 
 const Tasks = () => {
-    const [todos, setTodos] = useState<Todo[]>([]);
-    const { data: session } = useSession()
+    const { tasks, handlePatch } = useTask()
+    const [todos, setTodos] = useState<Todo[]>(tasks);
     const { toast } = useToast()
 
-    const fetchTodos = useCallback(async () => {
-        const response = await axios.get(`/api/tasks/getTasks/${session?.user?.email}`);
-        if (response.status === 200) {
-            setTodos(response.data.tasks);
-        }
-    }, [session])
-
     useEffect(() => {
-        fetchTodos();
-    }, [fetchTodos]);
+        setTodos(tasks)
+    }, [tasks]);
 
     const handleDrop = async (id: string, status: string) => {
         console.log(id, status);
@@ -50,6 +43,7 @@ const Tasks = () => {
                 todo.id === id ? { ...todo, status: status as Status } : todo
             )
         );
+        handlePatch()
     };
 
     const columns = [
@@ -61,9 +55,9 @@ const Tasks = () => {
 
     return (
         <DragDropContext>
-            <div className="flex space-x-4 p-4">
+            <div className="flex overflow-x-auto no-scrollbar space-x-4 p-4">
                 {columns.map(column => (
-                    <div key={column.status} className="w-1/4">
+                    <div key={column.status} className="max-md:flex-shrink-0 w-[70vw] md:w-1/4">
                         <h2 className="text-lg font-semibold mb-2 flex items-center justify-between">
                             {column.title}
                         </h2>

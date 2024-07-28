@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { useToast } from '@/components/ui/use-toast';
 import { LuLoader2 } from 'react-icons/lu';
 import axios from 'axios';
+import { useTask } from '@/context/TasksContext';
 
 interface DraggableCardProps {
   todo: Todo;
@@ -12,8 +13,10 @@ interface DraggableCardProps {
 }
 
 const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
+
   const ref = useRef<HTMLDivElement>(null);
   const { toast } = useToast()
+  const {handlePatch} = useTask()
   const [loading, setLoading] = useState(false)
 
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -52,7 +55,7 @@ const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
           description: response.data.message,
         })
       }
-      // window.location.reload()
+      handlePatch()
     } catch (error) {
       toast({
         title: 'Error',

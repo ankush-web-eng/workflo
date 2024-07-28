@@ -1,0 +1,27 @@
+{
+    "theme_color": "#C084FC",
+    "background_color": "#E9D5FF",
+    "icons": [
+      {
+        "purpose": "maskable",
+        "sizes": "512x512",
+        "src": "procedure.png",
+        "type": "image/png"
+      },
+      {
+        "purpose": "any",
+        "sizes": "512x512",
+        "src": "procedure.png",
+        "type": "image/png"
+      }
+    ],
+    "orientation": "portrait",
+    "display": "standalone",
+    "dir": "auto",
+    "lang": "en-US",
+    "name": "Workflo",
+    "short_name": "Workflo",
+    "description": "Manage your work interactively in contemprary way with Workflo!",
+    "id": "workflo",
+    "start_url": "/"
+  }
