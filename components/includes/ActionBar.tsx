@@ -21,7 +21,7 @@ const ActionBar = () => {
           <button onClick={handleClick} className="px-3 py-1 bg-gray-200 rounded-md text-sm">Filter</button>
           <button onClick={handleClick} className="px-3 py-1 bg-gray-200 rounded-md text-sm">Share</button>
         </div>
-        <button className="px-4 py-2 bg-purple-600 text-white rounded-md">Create new</button>
+        <button onClick={handleClick} className="px-4 py-2 bg-purple-600 text-white rounded-md">Create new</button>
       </div>
     )
   }

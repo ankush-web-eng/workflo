@@ -1,24 +1,26 @@
 'use client'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useToast } from '../ui/use-toast'
-import AddTaskTrigger from '../extentions/AddTaskTrigger'
+import { useSession } from 'next-auth/react'
+
+import { useToast } from '@/components/ui/use-toast'
+import ProfileAvatar from '@/components/includes/ProfileAvatar'
 
 const Sidebar = () => {
-    
-    const {data:session} = useSession()
-    const {toast} = useToast()
 
-    const handleClick = () => {
-      toast({
-        title: 'Available soon',
-        description: 'This feature is in development and will be available soon.'
-      });
-    }
+  const { data: session } = useSession()
+  const { toast } = useToast()
+
+  const handleClick = () => {
+    toast({
+      title: 'Available soon',
+      description: 'This feature is in development and will be available soon.'
+    });
+  }
 
   return (
     <aside className="w-64 bg-white shadow-md hidden md:block">
       <div className="p-4">
+        <ProfileAvatar />
         <h2 className="text-xl font-bold">{session?.user?.name}</h2>
       </div>
       <nav className="mt-6">
@@ -29,7 +31,7 @@ const Sidebar = () => {
         <Link href="#" className="block py-2 px-4 text-gray-600 hover:bg-purple-100 hover:text-purple-700">Analytics</Link>
       </nav>
       <div className="mt-auto p-4">
-        <AddTaskTrigger status='To do' />
+        <button onClick={handleClick} className="px-4 py-2 bg-purple-600 text-white rounded-md">Add Task</button>
       </div>
       <div className="mt-4 p-4">
         <button onClick={handleClick} className="w-full text-gray-600 py-2 px-4 flex items-center">

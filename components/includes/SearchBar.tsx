@@ -16,7 +16,6 @@ const SearchBar = () => {
     <div className="relative" onClick={handleClick}>
       <input
         type="text"
-        disabled
         placeholder="Search"
         className="w-full py-2 px-4 pr-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
       />
