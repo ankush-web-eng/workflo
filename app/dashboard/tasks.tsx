@@ -11,7 +11,7 @@ import DropArea from '@/components/DropArea';
 import { useToast } from "@/components/ui/use-toast";
 import { useTask } from '@/context/TasksContext';
 
-const Tasks = () => {
+const TaskBoard = () => {
     const { tasks, handlePatch } = useTask()
     const [todos, setTodos] = useState<Todo[]>(tasks);
     const { toast } = useToast()
@@ -79,4 +79,4 @@ const Tasks = () => {
     );
 };
 
-export default Tasks;
+export default TaskBoard;

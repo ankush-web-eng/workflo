@@ -4,6 +4,9 @@ import "@/styles/globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/context/sessionProvider";
 import { TasksProvider } from "@/context/TasksContext";
+import Provider from "./provider";
+import Sidebar from "@/components/includes/Sidebar";
+import Header from "@/components/includes/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,13 +53,17 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Workflo"></meta>
       </head>
+
       <body className={inter.className}>
-        <AuthProvider>
-          <TasksProvider>
-            {children}
-          </TasksProvider>
-          <Toaster />
-        </AuthProvider>
+        <Provider>
+          <body className="flex h-screen bg-gray-100">
+            <Sidebar />
+            <main className="flex-1 flex flex-col overflow-hidden">
+              <Header />
+              {children}
+            </main>
+          </body>
+        </Provider>
       </body>
     </html>
   );
