@@ -45,7 +45,6 @@ export async function POST(req: NextRequest, params: Params) {
         return NextResponse.json({ success: true, message: "Task updated successfully" }, { status: 200 });
 
     } catch (error) {
-        console.error("Error updating task:", error);
         return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
     } finally {
         await prisma.$disconnect();

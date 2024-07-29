@@ -53,7 +53,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, message: "Profile picture updated successfully" }, { status: 200 })
 
     } catch (error) {
-        console.error(error)
         return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 })
     }
 }

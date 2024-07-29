@@ -61,7 +61,6 @@ export default function AddTask({ status }: { status: string }) {
                 })
             }
         } catch (error) {
-            console.error(error)
             toast({
                 title: "Failed to add task",
                 description: "An error occurred while adding the task",

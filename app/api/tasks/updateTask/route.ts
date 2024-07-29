@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
     try {
         const reqBody = await req.json();
         const { id, title, email, status, priority, deadline, description } = reqBody;
-        console.log(email, title, status, priority, deadline, description)
 
         const isTask = await prisma.todo.update({
             where: {

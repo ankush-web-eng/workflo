@@ -31,7 +31,6 @@ export async function sendVerificationEmail(email: string,
     await new Promise((resolve, reject) => {
       transporter.sendMail(mailOptions, (err: Error, info: any) => {
         if (err) {
-          console.error(err);
           reject(err);
         } else {
           resolve(info);

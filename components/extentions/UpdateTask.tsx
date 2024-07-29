@@ -66,7 +66,6 @@ export default function UpdateTask({ todo }: { todo: Todo }) {
                 });
             }
         } catch (error) {
-            console.error(error);
             toast({
                 title: "Server Error",
                 description: "An error occurred while adding the task",
