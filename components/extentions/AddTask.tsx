@@ -128,7 +128,7 @@ export default function AddTask({ status }: { status: string }) {
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-600">Deadline</span>
-                    <div className="relative">
+                    <div className="relative px-20">
                         <DateTimePicker onDateTimeChange={handleDateTimeChange} />
                     </div>
                 </div>
