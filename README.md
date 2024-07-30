@@ -2,7 +2,22 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, make sure it is installed locally properly:
+
+```bash
+git clone [name](https://github.com/ankush-web-eng/workflo.git)
+# then
+npm run install
+```
+
+Your Project has been setup locally, now add required environment variables.
+After adding, generate the prisma schema:
+
+```bash
+npx prisma generate
+```
+
+Now, you can run it locally:
 
 ```bash
 npm run dev
@@ -16,21 +31,24 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can check [Dockerfile](https://github.com/ankush-web-eng/workflo/blob/master/Dockerfile) as well for refrence.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Docs
 
-## Learn More
+This project is built with [T3] Stack which inlcude [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [TailwindCSS](https://tailwindcss.com/).
 
-To learn more about Next.js, take a look at the following resources:
+Authentication is managed by [Next-Auth](https://next-auth.js.org/)'s [CredentialsProvider](https://next-auth.js.org/providers/credentials).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Drag and Drop feature is amde possible with [react-dnd](https://react-dnd.github.io/react-dnd/about) library.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You can use the [Docker-image](https://hub.docker.com/repository/docker/deshwalankush23/workflo/general) as well to run it locally on your machine directly.
 
-## Deploy on Vercel
+To run Docker image directly, just run:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker pull deshwalankush23/workflo
+# add your environment variables, then
+docker run -d -p 3000:3000 -e DATABASE_URL=mongodb://mongodb:27017/workflo deshwalankush23/workflo
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
