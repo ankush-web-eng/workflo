@@ -23,9 +23,9 @@ interface DraggableCardProps {
 const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
 
   const ref = useRef<HTMLDivElement>(null);
-  const { toast } = useToast()
-  const { handlePatch } = useTask()
-  const [loading, setLoading] = useState(false)
+  const { toast } = useToast();
+  const { handlePatch } = useTask();
+  const [loading, setLoading] = useState(false);
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'TODO',
@@ -54,16 +54,16 @@ const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
   };
 
   const handleDelete = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await axios.get(`/api/tasks/deleteTask/${id}`)
       if (response.status === 200) {
         toast({
           title: 'Success',
           description: response.data.message,
-        })
+        });
       }
-      handlePatch()
+      handlePatch();
     } catch (error) {
       toast({
         title: 'Error',
@@ -71,11 +71,14 @@ const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
         variant: 'destructive'
       })
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
-  const descriptionCopy = todo.description
-  const des = descriptionCopy?.split('.')
+  const descriptionCopy = todo.description;
+  const des = descriptionCopy?.split('.');
+  const date = todo?.deadline ? new Date(todo.deadline).toLocaleDateString() : '';
+  const currentDate = new Date().toLocaleDateString();
+  const urgent = currentDate === date ? 'text-red-600 font-semibold' : ''; 
 
   return (
     <Drawer>
@@ -91,7 +94,7 @@ const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
               <span className={`px-2 py-1 rounded-full text-xs text-white ${getPriorityColor(todo.priority)}`}>
                 {todo.priority}
               </span>
-              <span className="text-xs text-gray-500">{todo.deadline ? new Date(todo.deadline).toLocaleDateString() : 'No due date'}</span>
+              <span className={`text-xs text-gray-500 ${urgent}`}>{todo.deadline ? date : 'No due date'}</span>
               <span className='cursor-pointer'>{loading ? <LuLoader2 className='animate-spin' /> : <MdDelete onClick={() => handleDelete(todo.id)} />}</span>
             </div>
           </div>
