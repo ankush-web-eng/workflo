@@ -23,7 +23,7 @@ const DropArea: FC<DropAreaProps> = ({ status, children }) => {
   return (
     <div
       ref={ref}
-      className={`p-4 border ${isOver ? 'border-blue-500' : 'border-gray-400'} rounded`}
+      className={`p-4 shadow-md ${isOver ? 'border-blue-500' : 'border-gray-400'} rounded`}
     >
       <div className="space-y-4">
         {children}

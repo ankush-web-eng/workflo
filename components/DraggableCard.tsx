@@ -79,13 +79,14 @@ const DraggableCard: FC<DraggableCardProps> = ({ todo, onDrop }) => {
   const date = todo?.deadline ? new Date(todo.deadline).toLocaleDateString() : '';
   const currentDate = new Date().toLocaleDateString();
   const urgent = currentDate === date ? 'text-red-600 font-semibold' : ''; 
+  const color = currentDate == date ? 'bg-yellow-300' : 'bg-white';
 
   return (
     <Drawer>
       <DrawerTrigger>
         <div
           ref={ref}
-          className={`mb-4 bg-gray-100 rounded-lg shadow-md ${isDragging ? 'opacity-50' : 'opacity-100'}`}
+          className={`mb-4 ${color} rounded-lg shadow-md ${isDragging ? 'opacity-50' : 'opacity-100'}`}
         >
           <div className="p-4 flex justify-start flex-col">
             <h3 className="text-lg font-semibold mb-2">{todo.title}</h3>
