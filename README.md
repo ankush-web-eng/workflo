@@ -1,54 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+<img src = "/public/landing.png">
+<h1 align="center">workflo</h1>
+</div>
 
-## Getting Started
+# Workflo
 
-First, make sure it is installed locally properly:
+## Manage Tasks with Ease
+
+### Drag, drop, and conquer your to-do list with our intuitive task management application.
+
+- Try out the application here [Workflo](https://workflo.ankushsingh.tech)
+
+### Built with T3 Stack
+
+- It is primarily developed with Next.js 14, TypeScript, Tailwind and Next-Auth.
+
+## If you are a dev curious about our code, follow below mentioned steps:
+
+### Clone this repo
 
 ```bash
-git clone [name](https://github.com/ankush-web-eng/workflo.git)
-# then
-npm run install
+git clone https://github.com/ankush-web-eng/workflo
 ```
 
-Your Project has been setup locally, now add required environment variables.
-After adding, generate the prisma schema:
+### Install the dependencies
 
 ```bash
-npx prisma generate
+npm install
 ```
 
-Now, you can run it locally:
+### Run the application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can check [Dockerfile](https://github.com/ankush-web-eng/workflo/blob/master/Dockerfile) as well for refrence.
-
-## Docs
-
-This project is built with [T3] Stack which inlcude [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [TailwindCSS](https://tailwindcss.com/).
-
-Authentication is managed by [Next-Auth](https://next-auth.js.org/)'s [CredentialsProvider](https://next-auth.js.org/providers/credentials).
-
-Drag and Drop feature is amde possible with [react-dnd](https://react-dnd.github.io/react-dnd/about) library.
-
-You can use the [Docker-image](https://hub.docker.com/repository/docker/deshwalankush23/workflo/general) as well to run it locally on your machine directly.
-
-To run Docker image directly, just run:
+or
 
 ```bash
-docker pull deshwalankush23/workflo
-# add your environment variables, then
-docker run -d -p 3000:3000 -e DATABASE_URL=mongodb://mongodb:27017/workflo deshwalankush23/workflo
+npm run build && npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## With Docker:
+
+```bash
+docker-compose up
+```
+
+- It will start the docker compose with required containers
+
+```bash
+docker built -t workflo .
+```
+
+- It will build the application, now just run the application with docker run
+
+- The application will start on [http://localhost:3000](http://localhost:3000)
+
+## Happy Coding
